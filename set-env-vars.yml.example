@@ -1,0 +1,4 @@
+--set-env-vars:
+  DEBUG: app
+  # JSON.stringify(["http://localhost:3000","https://some-host.com"])
+  ALLOW_ORIGIN: '["http://localhost:3000","https://some-host.com"]'

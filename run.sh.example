@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Project to use cloud run
+PROJECT_ID='some-project-1234'
+PROJECT_NAME='Some Project'
+
+# Used for image name and service name
+APP_NAME='my-proxy'
+
+# "Cloud run" settings (more on "gcloud beta run deploy --help")
+REGION='asia-northeast1'
+PLATFORM='managed'
+DEPLOY_OPTS=(
+  --flags-file=set-env-vars.yml
+  --allow-unauthenticated
+  --memory=256Mi   # default 256Mi
+  --concurrency=20 # default 80
+  --timeout=1m     # default 5m
+)
+
+LOCAL_BUILD_CMD='docker-compose build prod' # Specify how to build image locally
+LOCAL_IMAGE_NAME='toy-proxy_prod'           # Image to use on cloud run
+
+. '../cloud-run-script/run-main.sh'

@@ -1,0 +1,8 @@
+version: "3.7"
+
+services:
+  prod:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      target: prod
