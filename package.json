@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "dev": "DEBUG=app nodemon ./src/proxy.js",
-    "test": "mocha ./src/proxy.test.js"
+    "test": "mocha ./src/proxy.test.js --timeout 10000",
+    "deploy": "now . -A now.json --debug"
   },
   "author": "",
   "license": "ISC",

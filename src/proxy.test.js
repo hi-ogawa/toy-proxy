@@ -4,19 +4,23 @@ const qs = require('qs');
 
 const proxy = require('./proxy');
 
-describe('proxy GET /', function() {
-  it('resolveRedirection and requestHeaderBlacklist', async () => {
-    const url1 = 'https://gitlab.com/profile';
-    const url2 = 'https://gitlab.com/users/sign_in';
-    await supertest(proxy)
-      .get('/?' + qs.stringify({ url: url1, resolveRedirection: 'true', requestHeaderBlacklist: ['host'] }))
-      .expect(res => {
-        assert.deepStrictEqual(res.headers['location'], '?' + qs.stringify({
-          url: url2,
-          requestHeaderBlacklist: ['host'],
-          resolveRedirection: 'true',
-        }))
-        assert.strictEqual(res.status, 302);
-      });
-  }).timeout(10000);
+describe('proxy GET /', () => {
+  describe('followRedirection and requestHeaderBlacklist', () => {
+    const url = 'https://gitlab.com/profile'; // redirected to 'https://gitlab.com/users/sign_in'
+    it('1', async () => {
+      await supertest(proxy)
+        .get('/?' + qs.stringify({ url, followRedirection: 'true', requestHeaderBlacklist: ['host'] }))
+        .expect(res => {
+          assert.strictEqual(res.status, 200);
+        });
+    });
+
+    it('2', async () => {
+      await supertest(proxy)
+        .get('/?' + qs.stringify({ url, requestHeaderBlacklist: ['host'] }))
+        .expect(res => {
+          assert.strictEqual(res.status, 302);
+        });
+    });
+  });
 });

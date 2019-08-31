@@ -1,0 +1,14 @@
+{
+  "name": "toy-proxy",
+  "version": 2,
+  "builds": [
+    { "src": "src/proxy.js", "use": "@now/node", "config": { "helpers": "false" } }
+  ],
+  "routes": [
+    { "src": "/", "dest": "src/proxy.js" }
+  ],
+  "env": {
+    "DEBUG": "app",
+    "ALLOW_ORIGIN": "[\"http://localhost:3000\",\"https://youtube-audio-offline.hiogawa.now.sh\"]"
+  }
+}

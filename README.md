@@ -3,9 +3,9 @@ Toy Proxy
 Control proxy behaviour via query parameters as below:
 
 - url: string
-- resolveRedirection: boolean
+- followRedirection: boolean
 - requestHeadersOverride: object
-- requestHeaderBlacklist: array(string)
+- requestHeaderBlacklist: array(string) (e.g. to blacklist headers managed by browser)
 - responseHeadersOverride: object
 - responseHeaderBlacklist: array(string)
 - responseStatusOverride: number
@@ -27,6 +27,10 @@ $ npm run dev
 # Testing
 $ npm test
 
-# Deployment (cf. https://github.com/hi-ogawa/cloud-run-script)
+# Deployment
+## as amazon lambda via zeit now (super generous free plan https://zeit.co/account/plan)
+$ bash run deploy
+
+## as cloud run conatiner (cf. https://github.com/hi-ogawa/cloud-run-script)
 $ bash run.sh deploy
 ```
