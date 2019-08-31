@@ -32,7 +32,7 @@ const proxy = async (req, res, next) => {
     responseStatusOverride,
   } = queryObj;
 
-  if (!url) { return next(new Error('Required parameter: url')); }
+  if (!url) { return res.status(400).end('Required parameter: url'); }
 
   const headers = _.pickBy(
     requestHeadersOverride || req.headers,
